@@ -1,41 +1,55 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react'
 import auth from '../firebase/firebase.config';
+import axios from 'axios';
 
 export const AuthContext = createContext();
 
 const googleProvider = new GoogleAuthProvider
-const AuthProvider = ({children}) => {
-    const [loading,setLoading]= useState(true);
-    const [user, setUser] = useState(null);
+const AuthProvider = ({ children }) => {
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [role, setRole] = useState('');
+
+  const signupWithEmailAndPassword = (email, pass) => {
+    console.log(email, pass);
+
+    return createUserWithEmailAndPassword(auth, email, pass)
+  }
+  const handleGoogleSignin = () => {
+    return signInWithPopup(auth, googleProvider)
+  }
 
 
-    const signupWithEmailAndPassword = (email,pass)=>{
-        console.log(email,pass);
-        
-        return createUserWithEmailAndPassword(auth,email,pass)
+  const authData = {
+    signupWithEmailAndPassword,
+    setUser,
+    user,
+    handleGoogleSignin,
+    loading
+  }
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+      setLoading(false)
+
+    })
+    return () => {
+      unsubscribe()
     }
-      const handleGoogleSignin =()=>{
-        return signInWithPopup(auth,googleProvider)
-      }
-        
-       
-    const authData={
-        signupWithEmailAndPassword,
-        setUser,
-        user,
-        handleGoogleSignin,
-        loading
-    }
-    useEffect(()=>{
-         const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
-           setUser(currentUser)
-           setLoading(false)
-         })
-         return ()=>{
-            unsubscribe()
-         }
-    },[])
+  }, [])
+
+  useEffect(() => {
+    if (!user) return;
+    axios.get(`http://localhost:8000/users/role/${user?.email}`)
+      .then(res => {
+        setRole(res.data.role)
+      })
+
+  }, [user])
+  console.log(role);
+
+
 
   return <AuthContext value={authData}>
     {children}
