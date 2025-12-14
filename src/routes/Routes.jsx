@@ -9,6 +9,7 @@ import Signup from "../Pages/Signup.jsx";
 import DashboardLayout from "../DashboardLayout/DashboardLayout.jsx";
 import MainDashboard from "../Pages/Dashboard/MainDashboard/MainDashboard.jsx";
 import CreateDonation from "../Pages/Dashboard/CreateDonation/CreateDonation.jsx";
+import ManageDonation from "../ManageDonation/ManageDonation.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
        {
         path: "create-donation",
         element: <CreateDonation></CreateDonation>
+       },
+       {
+        path: "manage-donation",
+        element: <ManageDonation></ManageDonation>
        },
     ]
   }

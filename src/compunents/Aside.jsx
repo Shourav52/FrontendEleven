@@ -33,6 +33,16 @@ const Aside = () => {
         >
           <FaHandHoldingHeart /> Create Donations
         </NavLink>
+        <NavLink
+          to="/dashboard/manage-donation"
+          className={({ isActive }) =>
+            `flex items-center gap-3 p-3 rounded-lg font-semibold hover:bg-blue-200 transition ${
+              isActive ? "bg-blue-200 text-blue-700" : "text-gray-700"
+            }`
+          }
+        >
+          <FaHandHoldingHeart />My Donation Requests
+        </NavLink>
 
         <NavLink
           to="/admin/settings"

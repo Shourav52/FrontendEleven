@@ -12,8 +12,6 @@ const CreateDonation = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        const displayName = form.displayName.value;
-        const email = form.email.value;
         const recipientName = form.recipientName.value;
         const district = form.district.value;
         const upazila = form.upazila.value;
@@ -26,8 +24,8 @@ const CreateDonation = () => {
 
         const formData = {
 
-            displayName,
-            email,
+            donorName: user?.displayName,
+            donorEmail: user?.email,
             recipientName,
             district,
             upazila,
@@ -40,14 +38,14 @@ const CreateDonation = () => {
             showOnHome
         }
         console.log(formData);
-            axiosInstance.post('/donations', formData)
-                .then(res => {
-                    console.log(res.data);
-                    alert(res.data.insertedId)
-                })
-                .catch(err => console.log(err))
+        axiosInstance.post('/donations', formData)
+            .then(res => {
+                console.log(res.data);
+                alert(res.data.insertedId)
+            })
+            .catch(err => console.log(err))
 
-        
+
     }
 
 
