@@ -6,6 +6,9 @@ import MainLayout from "../MainLayout/MainLayout.jsx";
 import Home from "../Pages/Home.jsx";
 import Login from "../Pages/Login.jsx";
 import Signup from "../Pages/Signup.jsx";
+import DashboardLayout from "../DashboardLayout/DashboardLayout.jsx";
+import MainDashboard from "../Pages/Dashboard/MainDashboard/MainDashboard.jsx";
+import CreateDonation from "../Pages/Dashboard/CreateDonation/CreateDonation.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +29,20 @@ const router = createBrowserRouter([
         },
     ]
   },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+       {
+        path: "main",
+        element: <MainDashboard></MainDashboard>
+       },
+       {
+        path: "create-donation",
+        element: <CreateDonation></CreateDonation>
+       },
+    ]
+  }
 ]);
 
 export default router;
