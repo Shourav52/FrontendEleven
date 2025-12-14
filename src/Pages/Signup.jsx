@@ -27,9 +27,17 @@ const Signup = () => {
     const name = e.target.name.value;
     const photoUrl = e.target.photoUrl;
     const file = photoUrl.files[0];
+    const confirmPass = e.target.confirmPassword.value;
+    const bloodGroup = e.target.bloodGroup.value;
+    const district = e.target.district.value;
+    const upazila = e.target.upazila.value;
+
 
     const uppercase = /[A-Z]/;
     const lowercase = /[a-z]/;
+    if (pass !== confirmPass) {
+      return toast.error("Password and Confirm Password do not match!");
+    }
     if (pass.length < 6) {
       return toast.error(' Password must be at least 6 characters!');
     }
@@ -50,8 +58,14 @@ const Signup = () => {
     const formData = {
       email,
       pass,
+      confirmPass,
       name,
       mainPhotoUrl,
+      bloodGroup,
+      district,
+      upazila,
+      role: "donor",
+      status: "active",
 
     }
 
@@ -65,12 +79,12 @@ const Signup = () => {
           }).then(() => {
             setUser(userCredential.user)
             axios.post('http://localhost:8000/users', formData)
-          .then(res => {
-            console.log(res.data);
-          })
-          .catch(err => {
-            console.log(err);
-          });
+              .then(res => {
+                console.log(res.data);
+              })
+              .catch(err => {
+                console.log(err);
+              });
 
 
             toast.success("Signup Successful!");
@@ -87,16 +101,6 @@ const Signup = () => {
   }
   console.log(user);
 
-
-  const googleSignin = () => {
-    handleGoogleSignin()
-      .then(result => {
-        const user = result.user
-        setUser(user)
-        toast.success("Google Signup Successful!");
-      })
-      .catch(err => toast.error(err.message))
-  }
   return (
     <div className="min-h-screen flex items-center justify-center ">
       <MyContainer className={"flex justify-center items-center gap-20 flex-col md:flex-row"}>
@@ -116,6 +120,41 @@ const Signup = () => {
               <label htmlFor="">Photo Url </label>
               <input name='photoUrl' className='border-white border   rounded-[8px] p-2 w-full' type="file" placeholder='photoUrl' />
             </div>
+
+           <div>
+              <label htmlFor="">Blood Group</label>
+             <select  name="bloodGroup" defaultValue="" className="select" required>
+              <option disabled={false}>Select Blood Group</option>
+              <option>A+</option>
+              <option>A-</option>
+              <option>B+</option>
+              <option>B-</option>
+              <option>AB+</option>
+              <option>AB-</option>
+              <option>O+</option>
+              <option>O-</option>
+            </select>
+           </div>
+           <div>
+              <label htmlFor="">District</label>
+             <select name="district" defaultValue="" className="select" required>
+              <option disabled={false}>Select Blood Group</option>
+              <option>Dhaka</option>
+              <option>Chattogram</option>
+              <option>Rajshahi</option>
+            </select>
+           </div>
+           <div>
+              <label htmlFor="">Upazila</label>
+             <select name="upazila" defaultValue="" className="select" required>
+              <option disabled={false}>Select Upazila</option>
+              <option>Savar</option>
+              <option>Mirpur</option>
+              <option>Dhanmondi</option>
+            </select>
+           </div>
+
+
             <div >
               <label htmlFor="">Email</label>
               <input name="email" className='border-white border rounded-[8px] p-2 w-full' type="Email" placeholder='...@gmail.com' />
@@ -125,6 +164,15 @@ const Signup = () => {
               <label htmlFor="">Password</label>
               <input name='password' type={show ? "text" : "password"} className='border-white border  rounded-[8px] p-2 w-full'
                 placeholder='Enter Password' />
+              <span onClick={() => setshow(!show)}
+                className='absolute right-[8px] top-[36px] cursor-pointer z-50'>
+                {show ? <FaEye /> : <IoEyeOff />}
+              </span>
+            </div>
+            <div className='relative'>
+              <label htmlFor="">Confirm  Password</label>
+              <input name='confirmPassword' type={show ? "text" : "password"} className='border-white border  rounded-[8px] p-2 w-full'
+                placeholder='Confirm Password'/>
               <span onClick={() => setshow(!show)}
                 className='absolute right-[8px] top-[36px] cursor-pointer z-50'>
                 {show ? <FaEye /> : <IoEyeOff />}
@@ -140,12 +188,6 @@ const Signup = () => {
               <span className='text-sm text-gray-3]400'>or</span>
               <div className='h-px w-16 bg-gray-400'></div>
             </div>
-            <button onClick={googleSignin}
-              type='submit'
-              className='flex  bg-white text-black justify-center btn'>
-              <img className='w-5' src={googleimg} alt="" />
-              Continue With Google
-            </button>
 
             <p className='text-sm mt-2 '>
               Already you have an account?<Link className='text-blue-400 ml-2 underline hover:text-blue-700' to={"/login"} >Login</Link>
