@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import MyContainer from '../compunents/MyContainer'
@@ -6,7 +6,6 @@ import { Link } from 'react-router'
 import { AuthContext } from '../Provider/AuthProvider';
 import { updateProfile } from 'firebase/auth';
 import auth from '../firebase/firebase.config';
-import googleimg from '../assets/images.png'
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import axios from 'axios';
@@ -16,6 +15,22 @@ import axios from 'axios';
 
 const Signup = () => {
   const [show, setshow] = useState(false);
+  const [upozilas, setupozilas] = useState([])
+  const [upozila, setupozila] = useState('')
+  const [districts, setdistricts] = useState([])
+  const [district, setdistrict] = useState('')
+  useEffect(() => {
+    axios.get('/upozila.json')
+      .then(res => {
+        setupozilas(res.data.upazilas)
+      })
+    axios.get('/district.json')
+      .then(res => {
+        setdistricts(res.data.districts)
+      })
+  }, [])
+  console.log(upozilas);
+
 
   const { signupWithEmailAndPassword, setUser, user, handleGoogleSignin } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -29,8 +44,6 @@ const Signup = () => {
     const file = photoUrl.files[0];
     const confirmPass = e.target.confirmPassword.value;
     const bloodGroup = e.target.bloodGroup.value;
-    const district = e.target.district.value;
-    const upazila = e.target.upazila.value;
 
 
     const uppercase = /[A-Z]/;
@@ -63,11 +76,10 @@ const Signup = () => {
       mainPhotoUrl,
       bloodGroup,
       district,
-      upazila,
-      role: "donor",
-      status: "active",
+      upozila,
 
     }
+    console.log(formData);
 
 
     if (res.data.success == true) {
@@ -121,38 +133,50 @@ const Signup = () => {
               <input name='photoUrl' className='border-white border   rounded-[8px] p-2 w-full' type="file" placeholder='photoUrl' />
             </div>
 
-           <div>
+            <div>
               <label htmlFor="">Blood Group</label>
-             <select  name="bloodGroup" defaultValue="" className="select" required>
-              <option disabled={false}>Select Blood Group</option>
-              <option>A+</option>
-              <option>A-</option>
-              <option>B+</option>
-              <option>B-</option>
-              <option>AB+</option>
-              <option>AB-</option>
-              <option>O+</option>
-              <option>O-</option>
-            </select>
-           </div>
-           <div>
+              <select name="bloodGroup" defaultValue="" className="select" required>
+                <option disabled={false}>Select Blood Group</option>
+                <option>A+</option>
+                <option>A-</option>
+                <option>B+</option>
+                <option>B-</option>
+                <option>AB+</option>
+                <option>AB-</option>
+                <option>O+</option>
+                <option>O-</option>
+              </select>
+            </div>
+            <div>
               <label htmlFor="">District</label>
-             <select name="district" defaultValue="" className="select" required>
-              <option disabled={false}>Select Blood Group</option>
-              <option>Dhaka</option>
-              <option>Chattogram</option>
-              <option>Rajshahi</option>
-            </select>
-           </div>
-           <div>
-              <label htmlFor="">Upazila</label>
-             <select name="upazila" defaultValue="" className="select" required>
-              <option disabled={false}>Select Upazila</option>
-              <option>Savar</option>
-              <option>Mirpur</option>
-              <option>Dhanmondi</option>
-            </select>
-           </div>
+              <select name="district" defaultValue=""
+                value={district}
+                onChange={(e) => setdistrict(e.target.value)}
+                className="select" required>
+                <option disabled={false}>Select District</option>
+                {
+                  districts.map(d =>
+                    <option value={d.name} key={d.id}>{d.name}</option>
+                  )
+
+                }
+              </select>
+            </div>
+            <div>
+              <label htmlFor="">Upozila</label>
+              <select name="upozila" defaultValue=""
+                value={upozila}
+                onChange={(e) => setupozila(e.target.value)}
+                className="select" required>
+                <option disabled={false}>Select Upazila</option>
+                {
+                  upozilas.map(u =>
+                    <option value={u.name} key={u.id}>{u.name}</option>
+                  )
+
+                }
+              </select>
+            </div>
 
 
             <div >
@@ -172,7 +196,7 @@ const Signup = () => {
             <div className='relative'>
               <label htmlFor="">Confirm  Password</label>
               <input name='confirmPassword' type={show ? "text" : "password"} className='border-white border  rounded-[8px] p-2 w-full'
-                placeholder='Confirm Password'/>
+                placeholder='Confirm Password' />
               <span onClick={() => setshow(!show)}
                 className='absolute right-[8px] top-[36px] cursor-pointer z-50'>
                 {show ? <FaEye /> : <IoEyeOff />}

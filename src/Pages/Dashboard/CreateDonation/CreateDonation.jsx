@@ -1,20 +1,36 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import axios from "axios";
 import useAxios from "../../../hooks/useAxios";
+// import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 
 const CreateDonation = () => {
     const [showOnHome, setShowOnHome] = useState(false)
     const { user } = useContext(AuthContext);
     const axiosInstance = useAxios()
+    // const axiosSecure = useAxiosSecure();
+
+    const [upozilas, setupozilas] = useState([])
+    const [upozila, setupozila] = useState('')
+    const [districts, setdistricts] = useState([])
+    const [district, setdistrict] = useState('')
+    useEffect(() => {
+        axios.get('/upozila.json')
+            .then(res => {
+                setupozilas(res.data.upazilas)
+            })
+        axios.get('/district.json')
+            .then(res => {
+                setdistricts(res.data.districts)
+            })
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const recipientName = form.recipientName.value;
-        const district = form.district.value;
-        const upazila = form.upazila.value;
+        const recipientEmail = form.recipientEmail.value;
         const hospital = form.hospital.value;
         const address = form.address.value;
         const bloodGroup = form.bloodGroup.value;
@@ -28,13 +44,14 @@ const CreateDonation = () => {
             donorEmail: user?.email,
             recipientName,
             district,
-            upazila,
+            upozila,
             hospital,
             address,
             bloodGroup,
             date,
             time,
             message,
+            donation_status:'pending',
             showOnHome
         }
         console.log(formData);
@@ -57,7 +74,6 @@ const CreateDonation = () => {
 
             <form onSubmit={handleSubmit} className="space-y-4">
 
-                {/* Requester Info */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input
                         type="text"
@@ -70,7 +86,7 @@ const CreateDonation = () => {
 
                     <input
                         type="email"
-                        name="email"
+                        name="recipientEmail"
                         value={user?.email || ""}
                         readOnly
                         className="input input-bordered bg-gray-100"
@@ -89,26 +105,29 @@ const CreateDonation = () => {
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <select
-                        name="district"
-                        className="select select-bordered w-full"
+                    <select name="district" defaultValue=""
+                        value={district}
+                        onChange={(e) => setdistrict(e.target.value)}
+                        className="select" required>
+                        <option disabled={false}>Select District</option>
+                        {
+                            districts.map(d =>
+                                <option value={d.name} key={d.id}>{d.name}</option>
+                            )
 
-                        required
-                    >
-                        <option value="">Select District</option>
-                        <option value="Dhaka">Dhaka</option>
-                        <option value="Chattogram">Chattogram</option>
+                        }
                     </select>
+                    <select name="upozila" defaultValue=""
+                        value={upozila}
+                        onChange={(e) => setupozila(e.target.value)}
+                        className="select" required>
+                        <option disabled={false}>Select Upazila</option>
+                        {
+                            upozilas.map(u =>
+                                <option value={u.name} key={u.id}>{u.name}</option>
+                            )
 
-                    <select
-                        name="upazila"
-                        className="select select-bordered w-full"
-
-                        required
-                    >
-                        <option value="">Select Upazila</option>
-                        <option value="Dhanmondi">Dhanmondi</option>
-                        <option value="Mirpur">Mirpur</option>
+                        }
                     </select>
                 </div>
 

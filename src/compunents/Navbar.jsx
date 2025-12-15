@@ -49,7 +49,7 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <Link to={"/dashboard/main"} className="btn mr-3">Dashboard</Link>
+    <Link to={"/dashboard"} className="btn mr-3">Dashboard</Link>
    {
     user ? <button onClick={logout}className="btn btn-outline btn-warning">Logout</button> : <Link to={'/login'}  className="btn">Login</Link>
    }
