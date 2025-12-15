@@ -24,7 +24,7 @@ const Signup = () => {
       .then(res => {
         setupozilas(res.data.upazilas)
       })
-    axios.get('/district.json')
+    axios.get('./district.json')
       .then(res => {
         setdistricts(res.data.districts)
       })

@@ -10,6 +10,8 @@ import DashboardLayout from "../DashboardLayout/DashboardLayout.jsx";
 import MainDashboard from "../Pages/Dashboard/MainDashboard/MainDashboard.jsx";
 import CreateDonation from "../Pages/Dashboard/CreateDonation/CreateDonation.jsx";
 import ManageDonation from "../ManageDonation/ManageDonation.jsx";
+import AllUsers from "../AllUsers/AllUsers.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     children: [
        {
         path: "/dashboard",
@@ -41,6 +43,10 @@ const router = createBrowserRouter([
        {
         path: "create-donation",
         element: <CreateDonation></CreateDonation>
+       },
+       {
+        path: "allusers",
+        element: <AllUsers></AllUsers>
        },
        {
         path: "manage-donation",

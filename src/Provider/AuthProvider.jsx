@@ -4,13 +4,14 @@ import auth from '../firebase/firebase.config';
 import axios from 'axios';
 
 export const AuthContext = createContext();
+ 
 
-const googleProvider = new GoogleAuthProvider
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
+  const [roleLoading, setRoleLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [role, setRole] = useState('');
-
+  const [userStatus, setUserStatus] =useState('')
   const signupWithEmailAndPassword = (email, pass) => {
     console.log(email, pass);
 
@@ -23,7 +24,10 @@ const AuthProvider = ({ children }) => {
     signupWithEmailAndPassword,
     setUser,
     user,
-    loading
+    loading,
+    roleLoading,
+    role,
+    userStatus
   }
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -41,11 +45,14 @@ const AuthProvider = ({ children }) => {
     axios.get(`http://localhost:8000/users/role/${user?.email}`)
       .then(res => {
         setRole(res.data.role)
+        setUserStatus(res.data.status)
+        setRoleLoading(false)
       })
 
   }, [user])
-  console.log(role);
 
+
+  console.log(role)
 
 
   return <AuthContext value={authData}>
