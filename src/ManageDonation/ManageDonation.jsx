@@ -4,21 +4,43 @@ import { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 
 const ManageDonation = () => {
-    const [donation, setDonation]= useState([])
-    const axiosInstance = useAxios();
+    const [totalRequest, setTotalRequest]= useState(0)
+    const [myRequests, setMyRequests]= useState([])
+    const [itemsPerPage, setItemsPerPage]= useState(10)
+    const [currentPage, setCurrentPage]= useState(1)
+    const axiosInstance = useAxios()
     const {user} = useContext(AuthContext)
+    
+    useEffect(() => {
+        if (!user?.email) return;
 
-   useEffect(() => {
-    if (!user?.email) return;
+    axiosInstance.get(`/my-request/${user.email}?page=${currentPage-1}&size=${itemsPerPage}`)
+            .then(res => {
+              
+                setMyRequests(res.data.request)
+                setTotalRequest(res.data.totalRequest) 
+              })
+            .catch(err => console.log(err))
+    }, [axiosInstance, user?.email, currentPage, itemsPerPage])
 
-    axiosInstance.get(`/doner/donations/${user.email}`)
-        .then(res => {
-            setDonation(res.data);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-}, [axiosInstance, user?.email]);
+     const numberofPages = Math.ceil(totalRequest / itemsPerPage)
+     const pages = [...Array(numberofPages).keys()].map(e=> e+1)
+      // console.log(pages)
+    // console.log(myRequests);
+    // console.log(totalRequest);
+    // console.log(numberofPages);
+    const handlePrev =()=>{
+      if(currentPage > 1){
+        setCurrentPage(currentPage-1)
+      }
+
+    }
+    
+    const handleNext =()=>{
+      if(currentPage < pages.length){
+        setCurrentPage(currentPage+1)
+      }
+    }
 
   return (
    <div className="overflow-x-auto">
@@ -26,38 +48,37 @@ const ManageDonation = () => {
     {/* head */}
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
+        <th>No</th>
+        <th>Recipient Name</th>
+        <th>Status</th>
+        <th>Blood Group</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       {/* row 1 */}
       {
-        donation?.map(donation=>
+        myRequests?.map((request,index)=>
             <tr>
+              <th>
+                {index+1}
+              </th>
         <td>
           <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
-                <img
-                  src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                  alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
             <div>
-              <div className="font-bold">Hart Hagerty</div>
-              <div className="text-sm opacity-50">United States</div>
+              <div className="font-bold">
+                {request.recipientName}
+              </div>
+              <div className="text-sm opacity-50">{request.
+address}</div>
             </div>
           </div>
         </td>
         <td>
-          Zemlak, Daniel and Leannon
-          <br />
-          <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
+          {request.donation_status}
         </td>
-        <td>Purple</td>
+        <td>{request.bloodGroup
+}</td>
         <th className='flex '>
           <button className="btn mr-3 btn-error btn-xs">Delete</button>
           <button className="btn btn-info   btn-xs">Edit</button>
@@ -67,6 +88,16 @@ const ManageDonation = () => {
       }
     </tbody>
   </table>
+  <div className='mt-10 flex justify-center gap-3' >
+    <button onClick={handlePrev} className='btn'>Prev</button>{
+      pages.map(page=>
+        <button className={`btn ${page === currentPage ? 'bg-[#435585] text-white' :''}`}
+         onClick={()=> setCurrentPage(page)}>
+          {page}
+        </button>
+      )
+    }<button onClick={handleNext}  className='btn'>Next</button>
+  </div>
 </div>
   )
 }

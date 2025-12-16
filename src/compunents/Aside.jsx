@@ -59,7 +59,7 @@ const Aside = () => {
             }`
           }
         >
-          <FaHandHoldingHeart />My Donation Requests
+          <FaHandHoldingHeart />My Requests
         </NavLink>
            
          {

@@ -40,8 +40,8 @@ const CreateDonation = () => {
 
         const formData = {
 
-            donorName: user?.displayName,
-            donorEmail: user?.email,
+            requesterName: user?.displayName,
+            requesterEmail: user?.email,
             recipientName,
             district,
             upozila,
