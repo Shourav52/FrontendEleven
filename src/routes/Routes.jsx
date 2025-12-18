@@ -12,6 +12,8 @@ import CreateDonation from "../Pages/Dashboard/CreateDonation/CreateDonation.jsx
 import ManageDonation from "../ManageDonation/ManageDonation.jsx";
 import AllUsers from "../AllUsers/AllUsers.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
+import Donate from "../Pages/Donate/Donate.jsx";
+import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
         {
             path: "/signup",
             element: <Signup />,
+        },
+        {
+            path: "/donate",
+            element: <Donate></Donate>,
+        },
+        {
+            path: "/payment-success",
+            element: <PaymentSuccess></PaymentSuccess>,
         },
     ]
   },
