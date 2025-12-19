@@ -3,6 +3,7 @@ import useAxios from '../../hooks/useAxios'
 import axios from 'axios';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { useNavigate } from 'react-router';
+import TDonate from '../../compunents/TDonate';
 
 const Donate = () => {
     const axiosInstance = useAxios();
@@ -32,11 +33,12 @@ const Donate = () => {
 
   return ( 
     <div>
-       <form onSubmit={handleCheckout} className='flex justify-center items-center min-h-screen gap-4'>
-        <input name='donateAmount' type="text" placeholder="Type here" className="input" />
-        <button className='btn btn-primary' type='submit'>Donate</button>
+       <form onSubmit={handleCheckout} className='mt-10 flex justify-center'>
+        <input name='donateAmount' type="text" placeholder="Enter Your Donate Amount" className="input rounded-l-3xl" />
+        <button className='btn btn-primary rounded-r-3xl ml-[-3px]' type='submit'>Donate</button>
        </form>
-    </div>  
+       <TDonate></TDonate>
+    </div>   
   )
 }
 

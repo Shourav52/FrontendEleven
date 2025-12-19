@@ -34,10 +34,13 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser)
       setLoading(false)
 
+    if (!currentUser) {
+        setRole('');
+        setUserStatus('');
+        setRoleLoading(false);
+      }
     })
-    return () => {
-      unsubscribe()
-    }
+    return () => unsubscribe();
   }, [])
 
   useEffect(() => {
@@ -48,6 +51,12 @@ const AuthProvider = ({ children }) => {
         setUserStatus(res.data.status)
         setRoleLoading(false)
       })
+      .catch(err => {
+        console.error(err);
+        setRole('');
+        setUserStatus('');
+      })
+      .finally(() => setRoleLoading(false));
 
   }, [user])
 
@@ -55,9 +64,9 @@ const AuthProvider = ({ children }) => {
   console.log(role)
 
 
-  return <AuthContext value={authData}>
+  return <AuthContext.Provider value={authData}>
     {children}
-  </AuthContext>
+  </AuthContext.Provider>
 }
 
 export default AuthProvider;

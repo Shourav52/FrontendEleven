@@ -7,7 +7,7 @@ const ConectSection = () => {
                 <h2 className="text-3xl font-bold text-red-700 mb-8 text-center">
                     Contact Us
                 </h2>
-
+                
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                     <form className="bg-white p-6 rounded-lg shadow-md">
                         <div className="mb-4">

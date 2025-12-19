@@ -69,8 +69,7 @@ const ManageDonation = () => {
               <div className="font-bold">
                 {request.recipientName}
               </div>
-              <div className="text-sm opacity-50">{request.
-address}</div>
+              <div className="text-sm opacity-50">{request.address}</div>
             </div>
           </div>
         </td>

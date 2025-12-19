@@ -90,7 +90,7 @@ const Navbar = () => {
                 to="/donate"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-emerald-100 text-emerald-700 font-semibold"
+                    ? "bg-red-100 text-red-700 font-semibold"
                     : "text-yellow-200"
                 }
               >Donate</NavLink>
@@ -100,7 +100,7 @@ const Navbar = () => {
         <div className="navbar-end gap-3">
           <Link to={"/dashboard"} className="bg-red-500 hover:bg-red-400 hover:font-extrabold text-yellow-100  px-4 py-2 rounded-lg font-semibold  transition">Dashboard</Link>
           {
-            user ? <button onClick={logout} className="hover:bg-red-300 bg-gradient-to-r from-red-800 to-red-500 text-slate-200">Logout</button> : <Link to={'/login'} className="btn bg-gradient-to-r from-red-800 to-red-500 hover:bg-red-300 text-yellow-100 rounded-lg">Login</Link>
+            user ? <button onClick={logout} className="hover:bg-red-300 bg-gradient-to-r btn from-red-800 to-red-500 text-slate-200">Logout</button> : <Link to={'/login'} className="btn bg-gradient-to-r from-red-800 to-red-500 hover:bg-red-300 text-yellow-100 rounded-lg">Login</Link>
           }
         </div>
       </div>
