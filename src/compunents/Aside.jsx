@@ -25,6 +25,16 @@ const Aside = () => {
 
       <nav className="flex flex-col gap-3">
         <NavLink
+          to="/dashboard/my_profile"
+          className={({ isActive }) =>
+            `flex items-center gap-3 p-3 rounded-lg font-semibold hover:bg-blue-200 transition ${
+              isActive ? "bg-blue-200 text-blue-700" : "text-gray-700"
+            }`
+          }
+        >
+          <FaHandHoldingHeart />My Profile
+        </NavLink>
+        <NavLink
           to="/dashboard"
           className={({ isActive }) =>
             `flex items-center gap-3 p-3 rounded-lg font-semibold hover:bg-blue-200 transition ${

@@ -17,6 +17,7 @@ import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess.jsx";
 import SearchRequest from "../Pages/SearchRequest/SearchRequest.jsx";
 import Request from "../Pages/Request.jsx";
 import Details from "../Pages/Details.jsx";
+import MyProfile from "../Pages/Dashboard/MyProfile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
        {
         path: "/dashboard",
         element: <MainDashboard></MainDashboard>
+       },
+       {
+        path: "/dashboard/my_profile",
+        element: <MyProfile></MyProfile>
        },
        {
         path: "create-donation",
