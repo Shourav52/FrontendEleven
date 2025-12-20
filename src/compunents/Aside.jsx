@@ -98,6 +98,16 @@ const Aside = () => {
           </NavLink>
           )
         }
+        {
+          role == 'volunteer' && (<NavLink
+            to="/dashboard/all-blood-donation-request"
+            className={({ isActive }) =>
+              `flex items-center gap-3 p-3 rounded-lg font-semibold hover:bg-blue-200 transition ${isActive ? "bg-blue-200 text-blue-700" : "text-gray-700"
+              }`
+            }><FaUsers />All Users Request
+          </NavLink>
+          )
+        }
 
       </nav>
       <div className="mt-auto">

@@ -23,6 +23,7 @@ import AdminDashboard from "../Pages/Dashboard/AdminDashboard.jsx";
 import DashboardHome from "../Pages/Dashboard/DeshboardHome.jsx";
 import AllUserRequest from "../Pages/Dashboard/AllUserRequest.jsx";
 import Volenteer from "../Pages/Dashboard/Volenteer.jsx";
+import AllBdDonationReq from "../Pages/Dashboard/AllBdDonationReq.jsx";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
        {
         path: "/dashboard",
         element: <Volenteer></Volenteer>
+       },
+       {
+        path: "/dashboard/all-blood-donation-request",
+        element: <AllBdDonationReq></AllBdDonationReq>
        },
        {
         path: "allusersRequest",

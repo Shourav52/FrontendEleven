@@ -13,7 +13,7 @@ const Volenteer = () => {
       .then(res => setStats(res.data))
       .catch(err => console.log(err));
   }, []);
-
+  
   return (
     <div>
       <h2 className="text-3xl font-bold text-center mb-10">
