@@ -18,6 +18,7 @@ import SearchRequest from "../Pages/SearchRequest/SearchRequest.jsx";
 import Request from "../Pages/Request.jsx";
 import Details from "../Pages/Details.jsx";
 import MyProfile from "../Pages/Dashboard/MyProfile.jsx";
+import Edit from "../Pages/Dashboard/Edit.jsx";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,11 @@ const router = createBrowserRouter([
         path: "/dashboard/my_profile",
         element: <MyProfile></MyProfile>
        },
+
+       {
+        path: "/dashboard/edit-donation/:id",
+        element: <Edit></Edit>
+       },
        {
         path: "create-donation",
         element: <CreateDonation></CreateDonation>
@@ -82,6 +88,7 @@ const router = createBrowserRouter([
         path: "manage-donation",
         element: <ManageDonation></ManageDonation>
        },
+      
     ]
   }
 ]);

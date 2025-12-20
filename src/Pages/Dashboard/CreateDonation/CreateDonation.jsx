@@ -204,7 +204,7 @@ const CreateDonation = () => {
 
                 </div>
 
-                {/* Submit */}
+            
                 <button
                     type="submit"
                     //   disabled={userStatus === "blocked"}
