@@ -25,7 +25,10 @@ const AllUserRequest = () => {
 
   const handleStatusChange = (id, status) => {
     axiosInstance.patch(`/donation-request/status/${id}`, { status })
-      .then(() => fetchRequests())
+      .then(() =>{
+        toast.success(`Status updated to "${status}"`)
+         fetchRequests();
+      })
       .catch(err => console.error(err));
   };
 
@@ -33,11 +36,19 @@ const AllUserRequest = () => {
     if (!window.confirm("Are you sure you want to delete this request?")) return;
 
     axiosInstance.delete(`/donation-request/${id}`)
-      .then(() => fetchRequests())
+      .then(() =>{ 
+        toast.success("Donation request deleted successfully");
+        fetchRequests()
+
+      })
       .catch(err => console.error(err));
   };
 
-  if (loading) return <p>Loading requests...</p>;
+  if (loading) return (
+    <div className="flex justify-center items-center h-40">
+      <span className="loading loading-spinner loading-lg text-error"></span>
+    </div>
+  );
 
 
   return (

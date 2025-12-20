@@ -18,7 +18,10 @@ const Aside = () => {
 
 
   return (
-    <aside className="w-64 bg-gradient-to-b from-blue-50 to-blue-100 min-h-screen shadow-lg p-6">
+    <div className="dropdown mt-12">
+  <div tabIndex={0} role="button" className="btn text-white btn-info m-1">Meno</div>
+  <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+    <aside className="w-64 bg-gradient-to-b from-blue-50  to-blue-100 min-h-screen shadow-lg p-6">
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-blue-600">
           {role === "admin" && "Admin Panel"}
@@ -119,6 +122,9 @@ const Aside = () => {
 
       </div>
     </aside>
+  </ul>
+</div>
+    
   );
 };
 

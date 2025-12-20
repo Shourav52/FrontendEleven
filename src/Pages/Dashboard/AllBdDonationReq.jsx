@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import useAxios from "../../hooks/useAxios";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FaTrash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const AllBdDonationReq = () => {
   const axiosInstance = useAxios();
@@ -23,16 +24,13 @@ const AllBdDonationReq = () => {
 
   const handleStatusChange = (id, status) => {
     axiosInstance.patch(`/donation-request/status/${id}`, { status })
-      .then(res => fetchRequests())
-    .catch(err => console.error(err));
+      .then(res =>{ 
+        toast.success(`Status updated to "${status}"`);
+        fetchRequests()
+  })
+    .catch(err => toast.error(err));
   };
 
-  const handleDelete = (id) => {
-    if (role !== "admin") return;
-    axiosInstance.delete(`/donation-request/${id}`)
-      .then(res => fetchRequests())
-        .catch(err => console.error(err));
-  };
 
   return (
     <div className="p-4 md:p-6">
@@ -68,7 +66,6 @@ const AllBdDonationReq = () => {
     <th>Blood Group</th>
     <th>Date</th>
     <th>Status</th>
-    {role === "admin" && <th>Actions</th>}
     {role === "volunteer" && <th>Update Status</th>}
     </tr>
 </thead>
@@ -102,19 +99,17 @@ const AllBdDonationReq = () => {
 
 
     {role === "volunteer" && (
-  <div>
+  <div className="">
     <button
         onClick={() => handleStatusChange(req._id, "inprogress")}
         className="btn btn-xs btn-warning">
         In Progress
     </button>
-                <button
-                onClick={() => handleStatusChange(req._id, "completed")}
+        <button onClick={() => handleStatusChange(req._id, "completed")}
                 className="btn btn-xs btn-success">
                 Completed
                 </button>
-            </div>
-                  )}
+            </div>)}
                 </td>
               </tr>
             ))}
@@ -152,7 +147,7 @@ const AllBdDonationReq = () => {
     </div>
     <div className="flex gap-2 mt-3">
         {(role === "admin" || role === "volunteer") && (
-        <div>
+        <div >
             <button
             onClick={() => handleStatusChange(req._id, "inprogress")}
             className="btn btn-xs btn-warning flex-1">
@@ -166,13 +161,6 @@ const AllBdDonationReq = () => {
         </div>
         )}
 
-        {role === "admin" && (
-        <button
-            onClick={() => handleDelete(req._id)}
-            className="btn btn-xs btn-error flex-1">
-            <FaTrash />
-        </button>
-        )}
     </div>
     </div>
         ))}

@@ -51,7 +51,7 @@ const [requests, setRequests] = useState([]);
       </h2>
 
 
-
+     <div>
       {requests.length > 0 && (
         <div className="bg-white shadow rounded p-4">
           <h3 className="text-xl text-red-500 font-semibold mb-4">
@@ -133,6 +133,7 @@ const [requests, setRequests] = useState([]);
           </div>
         </div>
       )}
+      </div>
       <div className="mt-4 text-center">
             <button
               onClick={() => navigate("/dashboard/manage-donation")}

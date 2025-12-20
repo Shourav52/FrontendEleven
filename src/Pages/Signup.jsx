@@ -114,15 +114,15 @@ const Signup = () => {
   console.log(user);
 
   return (
-    <div className="min-h-screen flex items-center justify-center ">
+    <div className="min-h-screen flex items-center justify-center mt-10 mb-10">
       <MyContainer className={"flex justify-center items-center gap-20 flex-col md:flex-row"}>
         <div>
-          <h1 className='bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent font-semibold text-4xl'>Create Your Account</h1>
+          <h1 className='text-red-500 font-semibold text-4xl'>Create Your Account</h1>
           <p className='text-gray-600'>Type your Email and Password here... </p>
         </div>
-        <div className="card bg-gradient-to-br from-blue-50 to-blue-100
+        <div className="card bg-gradient-to-br from-red-100 to-red-200
  w-auto h-auto text-gray-600 font-semibold shadow-md p-8 rounded-lg ">
-          <h1 className='bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent font-semibold text-center text-2xl mb-4'>Signup</h1>
+          <h1 className='text-red-500 font-semibold text-center text-2xl mb-4'>Signup</h1>
           <form onSubmit={handleSubmit} className='flex flex-col gap-1' action="">
             <div>
               <label htmlFor="">Full Name</label>
@@ -134,7 +134,7 @@ const Signup = () => {
             </div>
 
             <div>
-              <label htmlFor="">Blood Group</label>
+              <label htmlFor="">Blood Group</label><br />
               <select name="bloodGroup" defaultValue="" className="select" required>
                 <option disabled={false}>Select Blood Group</option>
                 <option>A+</option>
@@ -148,7 +148,7 @@ const Signup = () => {
               </select>
             </div>
             <div>
-              <label htmlFor="">District</label>
+              <label htmlFor="">District </label> <br />
               <select name="district" defaultValue=""
                 value={district}
                 onChange={(e) => setdistrict(e.target.value)}
@@ -163,7 +163,7 @@ const Signup = () => {
               </select>
             </div>
             <div>
-              <label htmlFor="">Upozila</label>
+              <label htmlFor="">Upozila</label> <br />
               <select name="upozila" defaultValue=""
                 value={upozila}
                 onChange={(e) => setupozila(e.target.value)}

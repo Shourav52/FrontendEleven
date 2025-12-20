@@ -3,6 +3,7 @@ import useAxios from '../hooks/useAxios'
 import { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 const ManageDonation = () => {
   const [totalRequest, setTotalRequest] = useState(0)
@@ -55,9 +56,11 @@ const ManageDonation = () => {
 
     try {
       await axiosInstance.delete(`/donation-request/${id}`);
+      toast.success("Donation request deleted successfully");
       setMyRequests((prev) => prev.filter((req) => req._id !== id));
     } catch (err) {
       console.error(err);
+      toast.error("Something went wrong while deleting")
     }
   };
  const handleFilter = (e) => {

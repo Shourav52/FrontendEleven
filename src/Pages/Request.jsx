@@ -20,10 +20,10 @@ const Request = () => {
   }, [axiosInstance])
   if (loading) {
     return (
-      <p className="text-center mt-20 text-gray-500">
-        Loading donation requests...
-      </p>
-    )
+    <div className="flex justify-center items-center h-40">
+      <span className="loading loading-spinner loading-lg text-error"></span>
+    </div>
+  );
   }
 
   return (

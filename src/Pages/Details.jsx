@@ -32,9 +32,11 @@ const Details = () => {
       })
   }
 
-  if (loading) {
-    return <p className="text-center mt-20">Loading...</p>
-  }
+  if (loading) return (
+    <div className="flex justify-center items-center h-40">
+      <span className="loading loading-spinner loading-lg text-error"></span>
+    </div>
+  );
 
 
 

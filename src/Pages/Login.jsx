@@ -63,14 +63,14 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center ">
         <MyContainer className={"flex justify-center items-center gap-20 flex-col md:flex-row"}>
         <div>
-            <h1 className='bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent font-semibold text-4xl'>Login Your Account</h1>
+            <h1 className='bg-gradient-to-r from-red-500 to-indigo-400 bg-clip-text text-transparent font-semibold text-4xl'>Login Your Account</h1>
             <p className='text-gray-700'>Type your Email and Password here... </p>
         </div>
-        <div className="card bg-gradient-to-br from-blue-50 to-blue-100
+        <div className="card bg-gradient-to-br from-red-100 to-red-200
  w-auto h-auto text-black font-semibold shadow-md p-8 rounded-lg">
           <form onSubmit={handleSubmit}
             className='flex flex-col gap-1' action="">
-               <h1 className='bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent font-semibold text-4xl text-center text-2xl mb-4'>Login</h1>
+               <h1 className='bg-gradient-to-r from-red-500 to-indigo-600 bg-clip-text text-transparent font-semibold text-4xl text-center text-2xl mb-4'>Login</h1>
              <div>
                <label htmlFor="">Email</label>
               <input 

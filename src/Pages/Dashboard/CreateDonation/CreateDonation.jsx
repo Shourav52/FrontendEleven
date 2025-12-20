@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import axios from "axios";
 import useAxios from "../../../hooks/useAxios";
+import { toast } from "react-toastify";
 // import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 
@@ -58,9 +59,13 @@ const CreateDonation = () => {
         axiosInstance.post('/donations', formData)
             .then(res => {
                 console.log(res.data);
-                alert(res.data.insertedId)
+                toast.success("Created successfully ",res.data.insertedId)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                toast.error("Failed to create donation request")
+    })
+            
 
 
     }

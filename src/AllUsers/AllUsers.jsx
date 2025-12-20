@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import useAxios from '../hooks/useAxios';
+import { toast } from 'react-toastify';
 
 const AllUsers = () => {
   const axiosInstance = useAxios();
@@ -19,9 +20,12 @@ const AllUsers = () => {
     axiosInstance.patch(`/update/user/role?email=${email}&role=${role}`)
       .then(res => {
         console.log(res.data);
+        toast.success(`User role updated to ${role}`);
         fetchUsers();
       })
-      .catch(err => console.error(err));
+      .catch(() => {
+      toast.error("Failed to update user status");
+    });
   };
 
   const handleStatusChange = (email, status) => {
