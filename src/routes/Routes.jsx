@@ -21,6 +21,8 @@ import MyProfile from "../Pages/Dashboard/MyProfile.jsx";
 import Edit from "../Pages/Dashboard/Edit.jsx";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard.jsx";
 import DashboardHome from "../Pages/Dashboard/DeshboardHome.jsx";
+import AllUserRequest from "../Pages/Dashboard/AllUserRequest.jsx";
+import Volenteer from "../Pages/Dashboard/Volenteer.jsx";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +74,14 @@ const router = createBrowserRouter([
        {
         path: "/dashboard",
         element: <AdminDashboard></AdminDashboard>
+       },
+       {
+        path: "/dashboard",
+        element: <Volenteer></Volenteer>
+       },
+       {
+        path: "allusersRequest",
+        element: <AllUserRequest></AllUserRequest>
        },
        
        {

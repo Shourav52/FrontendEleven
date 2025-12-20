@@ -2,6 +2,7 @@ import { useContext } from "react";
 import AdminDashboard from "./AdminDashboard";
 import MainDashboard from "./MainDashboard/MainDashboard";
 import { AuthContext } from "../../Provider/AuthProvider";
+import Volenteer from "./Volenteer";
 
 const DashboardHome = () => {
   const { role, roleLoading } = useContext(AuthContext);
@@ -12,7 +13,7 @@ const DashboardHome = () => {
 
   if (role === "admin") return <AdminDashboard />;
   if (role === "donor") return   <MainDashboard></MainDashboard>;
-  if (role === "volunteer") return <VolunteerDashboard />;
+  if (role === "volunteer") return <Volenteer></Volenteer>
 
   return <div>No dashboard found</div>;
 };

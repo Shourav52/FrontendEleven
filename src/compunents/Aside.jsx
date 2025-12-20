@@ -88,18 +88,14 @@ const Aside = () => {
           </NavLink>
           )
         }
-
         {
-          role == 'admin' && (
-            <NavLink
-              to="/admin/settings"
-              className={({ isActive }) =>
-                `flex items-center gap-3 p-3 rounded-lg font-semibold hover:bg-blue-200 transition ${isActive ? "bg-blue-200 text-blue-700" : "text-gray-700"
-                }`
-              }
-            >
-              <FaCogs /> Add Volunteer
-            </NavLink>
+          role == 'admin' && (<NavLink
+            to="/dashboard/allusersRequest"
+            className={({ isActive }) =>
+              `flex items-center gap-3 p-3 rounded-lg font-semibold hover:bg-blue-200 transition ${isActive ? "bg-blue-200 text-blue-700" : "text-gray-700"
+              }`
+            }><FaUsers />All Users Request
+          </NavLink>
           )
         }
 
