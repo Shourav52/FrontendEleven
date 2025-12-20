@@ -19,6 +19,8 @@ import Request from "../Pages/Request.jsx";
 import Details from "../Pages/Details.jsx";
 import MyProfile from "../Pages/Dashboard/MyProfile.jsx";
 import Edit from "../Pages/Dashboard/Edit.jsx";
+import AdminDashboard from "../Pages/Dashboard/AdminDashboard.jsx";
+import DashboardHome from "../Pages/Dashboard/DeshboardHome.jsx";
 
 const router = createBrowserRouter([
   {
@@ -65,8 +67,13 @@ const router = createBrowserRouter([
     children: [
        {
         path: "/dashboard",
-        element: <MainDashboard></MainDashboard>
+        element: <DashboardHome></DashboardHome>
        },
+       {
+        path: "/dashboard",
+        element: <AdminDashboard></AdminDashboard>
+       },
+       
        {
         path: "/dashboard/my_profile",
         element: <MyProfile></MyProfile>

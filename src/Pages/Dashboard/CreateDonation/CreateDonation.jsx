@@ -67,20 +67,20 @@ const CreateDonation = () => {
 
 
     return (
-        <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow">
+        <div className="max-w-3xl mx-auto p-10 bg-white rounded-xl shadow">
             <h2 className="text-2xl font-bold text-red-600 mb-6">
                 Create Blood Donation Request
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input
                         type="text"
                         name="displayName"
                         value={user?.displayName || ""}
                         readOnly
-                        className="input input-bordered bg-gray-100"
+                        className="input w-full input-bordered bg-gray-100"
                         placeholder="Requester Name"
                     />
 
@@ -89,7 +89,7 @@ const CreateDonation = () => {
                         name="recipientEmail"
                         value={user?.email || ""}
                         readOnly
-                        className="input input-bordered bg-gray-100"
+                        className="input w-full input-bordered bg-gray-100"
                         placeholder="Requester Email"
                     />
                 </div>
@@ -108,7 +108,7 @@ const CreateDonation = () => {
                     <select name="district" defaultValue=""
                         value={district}
                         onChange={(e) => setdistrict(e.target.value)}
-                        className="select" required>
+                        className="select w-full" required>
                         <option disabled={false}>Select District</option>
                         {
                             districts.map(d =>
@@ -120,7 +120,7 @@ const CreateDonation = () => {
                     <select name="upozila" defaultValue=""
                         value={upozila}
                         onChange={(e) => setupozila(e.target.value)}
-                        className="select" required>
+                        className="select w-full" required>
                         <option disabled={false}>Select Upazila</option>
                         {
                             upozilas.map(u =>
@@ -166,19 +166,17 @@ const CreateDonation = () => {
                 </select>
 
                 {/* Date & Time */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 ">
                     <input
                         type="date"
                         name="date"
-                        className="input input-bordered"
-
+                        className="input w-full input-bordered"
                         required
                     />
                     <input
                         type="time"
                         name="time"
-                        className="input input-bordered"
-
+                        className="input w-full input-bordered"
                         required
                     />
                 </div>
