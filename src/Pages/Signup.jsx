@@ -90,7 +90,7 @@ const Signup = () => {
             displayName: name, photoURL: mainPhotoUrl
           }).then(() => {
             setUser(userCredential.user)
-            axios.post('http://localhost:8000/users', formData)
+            axios.post('https://backend-eleven.vercel.app//users', formData)
               .then(res => {
                 console.log(res.data);
               })
