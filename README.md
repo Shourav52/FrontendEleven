@@ -1,3 +1,56 @@
+Project Name : Blood Donation Center
+
+Live Link : https://glittery-buttercream-ba8482.netlify.app/
+
+Project Purpose :- A Blood Donation platform that connects donors, volunteers, and administrators to manage blood donation requests efficiently.
+
+User Roles :
+1. Donor
+2. Volunteer
+3. Admin
+
+DemoLogin:--------------------
+-
+Admin :
+Email: kumer241-35-186@diu.edu.bd
+pass: 123456Bb
+-
+Volunteer:---
+Email : ruponsaha1212@gmail.com
+pass: 123456Bb
+-
+Donor:-
+Email: shorovsaha52@gmail.com
+pass: 123456Bb
+-
+
+Key Features :-
+Firebase Authentication (Email & Password)
+1. Role-based Dashboard (Admin / Donor / Volunteer)
+2. Blood Donation Request Management
+3. Profile Update with Image Upload (ImgBB)
+4. Protected Routes using JWT
+5. Fully Responsive Dashboard
+6. Search Donors by Blood Group & Location
+
+Using Npm packges:
+-
+- react-router-dom
+- firebase
+- axios
+- react-icons
+- sweetalert2
+- jwt-decode
+
+Using Stacks :
+> React
+>  React Router DOM
+> Firebase Authentication
+> Tailwind CSS
+> Axios
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
