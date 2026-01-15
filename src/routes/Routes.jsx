@@ -24,7 +24,16 @@ import DashboardHome from "../Pages/Dashboard/DeshboardHome.jsx";
 import AllUserRequest from "../Pages/Dashboard/AllUserRequest.jsx";
 import Volenteer from "../Pages/Dashboard/Volenteer.jsx";
 import AllBdDonationReq from "../Pages/Dashboard/AllBdDonationReq.jsx";
-
+import ForgetPass from "../Pages/ForgetPass.jsx";
+import GetBlood from "../compunents/GetBlood.jsx";
+import Events from "../compunents/Events.jsx";
+import BecomeVolunteer from "../compunents/BecomeVolunteer.jsx";
+import RequestTraining from "../compunents/RequestTraining.jsx";
+import About from "../compunents/About.jsx";
+import Contact from "../compunents/contact.jsx";
+import Blog from "../compunents/Blog.jsx";
+import Support from "../compunents/Support.jsx";
+import Privacy from "../compunents/Privacy.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,6 +52,10 @@ const router = createBrowserRouter([
             element: <Signup />,
         },
         {
+            path:"/forget/:email",
+            element: <ForgetPass></ForgetPass>
+        },
+        {
             path: "/donate",
             element:<PrivateRoute><Donate></Donate></PrivateRoute> ,
         },
@@ -52,15 +65,51 @@ const router = createBrowserRouter([
         },
         {
             path: "/donation-request/:id",
-            element:<PrivateRoute><Details></Details></PrivateRoute> ,
+            element:<Details></Details>,
         },
         {
             path: "/payment-success",
             element: <PaymentSuccess></PaymentSuccess>,
         },
         {
+            path: "/get-blood",
+            element: <GetBlood></GetBlood>,
+        },
+        {
+            path: "/events",
+            element: <Events></Events>,
+        },
+        {
+            path: "/become-a-volunteer",
+            element: <BecomeVolunteer></BecomeVolunteer>,
+        },
+        {
+            path: "/training",
+            element: <RequestTraining></RequestTraining>,
+        },
+        {
             path: "/search",
             element: <SearchRequest></SearchRequest>,
+        },
+        {
+            path: "/about",
+            element: <About></About>,
+        },
+        {
+            path: "/contact",
+            element: <Contact></Contact>,
+        },
+        {
+            path: "/blog",
+            element: <Blog></Blog>,
+        },
+        {
+            path: "/support",
+            element: <Support></Support>,
+        },
+        {
+            path: "/privacy-policy",
+            element:<Privacy></Privacy>,
         },
     ]
   },

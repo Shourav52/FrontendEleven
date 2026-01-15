@@ -18,10 +18,16 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, pass)
   }
 
+const provider = new GoogleAuthProvider();
 
+const handleGoogleSignin = () => {
+  setLoading(true);
+  return signInWithPopup(auth, provider);
+};
 
   const authData = {
     signupWithEmailAndPassword,
+     handleGoogleSignin,
     setUser,
     user,
     loading,

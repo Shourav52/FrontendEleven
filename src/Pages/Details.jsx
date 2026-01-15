@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-
+import { MdDescription } from "react-icons/md";
+import { GrCircleInformation } from "react-icons/gr";
 import { AuthContext } from '../Provider/AuthProvider'
 import { useParams } from 'react-router'
 import useAxios from '../hooks/useAxios'
+import { IoLocationOutline } from "react-icons/io5";
 
 const Details = () => {
     const { id } = useParams()
@@ -42,70 +44,153 @@ const Details = () => {
 
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-10 mb-20">
-      <div className="card bg-base-100 shadow-lg">
-        <div className="card-body ">
-          <h2 className="text-3xl font-bold text-red-600 mb-4">
-            Donation Request Details
-          </h2>
+<div className="max-w-4xl mx-auto px-6 py-12 mb-20">
+  <div className="card bg-base-100 shadow-xl border border-base-300">
+    <div className="card-body space-y-8">
 
-          <div className='space-y-2 text-[20px] flex justify-between items-center font-semibold'>
-          <div>
-            <p><span className='font-bold'>Recipient Name:</span> {donation.recipientName}</p>
-          <p><span className='font-bold'>Blood Group:</span> <span className='text-red-500'>{donation.bloodGroup}</span></p>
-          <p><span className='font-bold'>Hospital:</span> {donation.hospital}</p>
-          <p><span className='font-bold'>Location:</span> {donation.upozila}, {donation.district}</p>
-          <p><span className='font-bold'>Address:</span> {donation.address}</p>
-          </div>
-          <div className=' mt-6'>
-            <p><span className='font-bold'>Date:</span> {donation.date}</p>
-          <p><span className='font-bold'>Time:</span> {donation.time}</p>
-          <p><span className='font-bold'>Message:</span> {donation.message}</p>
+      {/* ===== Page Header ===== */}
+      <div>
+        <h2 className="text-3xl font-bold text-error">
+          Donation Request Details
+        </h2>
+        <p className="text-base-content/70 mt-1">
+          View complete information about this blood donation request
+        </p>
+      </div>
+
+      <div className="divider"></div>
+      <section className="space-y-3">
+        <h3 className="text-xl font-semibold text-error flex items-center gap-2">
+  <MdDescription className="text-2xl" />
+  <span>Overview</span>
+</h3>
+
+        <p className="text-base-content/80 leading-relaxed">
+          {donation.message || "No additional message provided by the requester."}
+        </p>
+      </section>
+      <section className="space-y-4">
+<h3 className="text-xl font-semibold text-error flex items-center gap-2">
+  <GrCircleInformation className="text-2xl" />
+  <span>Key Information</span>
+</h3>
+
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-base">
           <p>
-            <span className='font-bold'>Status: </span>
+            <span className="font-semibold">Recipient Name:</span>{" "}
+            {donation.recipientName}
+          </p>
+
+          <p>
+            <span className="font-semibold">Blood Group:</span>{" "}
+            <span className="text-error font-bold">
+              {donation.bloodGroup}
+            </span>
+          </p>
+
+          <p>
+            <span className="font-semibold">Hospital:</span>{" "}
+            {donation.hospital}
+          </p>
+
+          <p>
+            <span className="font-semibold">Status:</span>{" "}
             <span className="text-orange-500 font-semibold">
               {donation.donation_status}
             </span>
           </p>
-          </div>
-          </div>
+        </div>
+      </section>
+      <section className="space-y-4">
+<h3 className="text-xl font-semibold text-error flex items-center gap-2">
+  <IoLocationOutline className="text-2xl" />
+  <span>Location & Schedule</span>
+</h3>
 
-          {
-            donation.donation_status === 'pending' && (
-              <div className="mt-6">
-                <button className="btn w-full btn-error text-white"
-                   onClick={() => document.getElementById('donate_modal').showModal()}>
-                    Donate
-                </button>
-              </div>
-            )
-          }
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-base">
+          <p>
+            <span className="font-semibold">Location:</span>{" "}
+            {donation.upozila}, {donation.district}
+          </p>
+
+          <p>
+            <span className="font-semibold">Address:</span>{" "}
+            {donation.address}
+          </p>
+
+          <p>
+            <span className="font-semibold">Date:</span>{" "}
+            {donation.date}
+          </p>
+
+          <p>
+            <span className="font-semibold">Time:</span>{" "}
+            {donation.time}
+          </p>
         </div>
-      </div>
-      <dialog id="donate_modal" className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg mb-4">Confirm Donation</h3>
-          <div className="space-y-3">
-            <input
-              type="text"
-              value={user?.displayName || 'N/A'}
-              readOnly
-              className="input input-bordered w-full"
-            />
-            <input
-              type="email"
-              value={user?.email}
-              readOnly
-              className="input input-bordered w-full"
-            />
+      </section>
+      {donation.donation_status === "pending" && (
+        <>
+          <div className="divider"></div>
+          <div className="pt-2">
+            <button
+              className="btn btn-error w-full md:w-1/2 mx-auto block"
+              onClick={() =>
+                document.getElementById("donate_modal").showModal()
+              }
+            >
+              Donate Now
+            </button>
           </div>
-    <div className="modal-action">
-            <button className="btn" onClick={() => document.getElementById('donate_modal').close()}> Cancel </button>
-              <button className="btn btn-error" onClick={handleConfirmDonate}> Confirm</button>
-          </div>
-        </div>
-      </dialog>
+        </>
+      )}
     </div>
+  </div>
+
+  {/* ===== Donate Modal ===== */}
+  <dialog id="donate_modal" className="modal">
+    <div className="modal-box">
+      <h3 className="font-bold text-lg mb-4">
+        Confirm Donation
+      </h3>
+
+      <div className="space-y-3">
+        <input
+          type="text"
+          value={user?.displayName || "N/A"}
+          readOnly
+          className="input input-bordered w-full"
+        />
+        <input
+          type="email"
+          value={user?.email || ""}
+          readOnly
+          className="input input-bordered w-full"
+        />
+      </div>
+
+      <div className="modal-action">
+        <button
+          className="btn"
+          onClick={() =>
+            document.getElementById("donate_modal").close()
+          }
+        >
+          Cancel
+        </button>
+        <button
+          className="btn btn-error"
+          onClick={handleConfirmDonate}
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </dialog>
+</div>
+
   )
 }
 

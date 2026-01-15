@@ -83,18 +83,18 @@ const ManageDonation = () => {
       </select>
       </div>
 
-      <table className="table">
-        {/* head */}
-        <thead>
-          <tr className='text-red-500'>
-            <th>No</th>
-            <th>Recipient Name</th>
-            <th>Status</th>
-            <th>Blood Group</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div className="hidden lg:block overflow-x-auto">
+        <table className="table w-full table-zebra">
+          <thead>
+            <tr className="text-red-500">
+              <th>No</th>
+              <th>Recipient Name</th>
+              <th>Status</th>
+              <th>Blood Group</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
           {/* row 1 */}
           {
             myRequests?.map((request, index) =>
@@ -130,6 +130,49 @@ const ManageDonation = () => {
           }
         </tbody>
       </table>
+      </div>
+
+      {/* Mobile / Tablet Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-4">
+        {myRequests?.map((request, index) => (
+          <div
+            key={request._id}
+            className="shadow-sm p-4 rounded-lg shadow hover:shadow-lg bg-white"
+          >
+            <div className="flex justify-between items-center mb-2">
+              <h4 className="font-bold text-red-500">
+                {request.recipientName}
+              </h4>
+              <span className="px-2 py-1 rounded bg-red-100 text-red-600 capitalize">
+                {request.donation_status}
+              </span>
+            </div>
+            <p className="text-sm mb-1">
+              <strong>No:</strong> {(currentPage - 1) * itemsPerPage + index + 1}
+            </p>
+            <p className="text-sm mb-1">
+              <strong>Address:</strong> {request.address}
+            </p>
+            <p className="text-sm mb-1">
+              <strong>Blood Group:</strong> {request.bloodGroup}
+            </p>
+            <div className="flex flex-wrap gap-2 mt-2">
+              <button
+                onClick={() => handleDelete(request._id)}
+                className="btn btn-xs btn-error"
+              >
+                Delete
+              </button>
+              <button
+                onClick={() => navigate(`/dashboard/edit-donation/${request._id}`)}
+                className="btn btn-xs btn-info"
+              >
+                Edit
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
       <div className='mt-10 flex justify-center gap-3' >
         <button onClick={handlePrev} className='btn'>Prev</button>{
           pages.map(page =>

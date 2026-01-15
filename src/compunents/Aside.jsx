@@ -236,7 +236,7 @@ const Aside = () => {
     </aside>
       </div>
     </>
-  );
+  ); 
 };
 
 export default Aside;
